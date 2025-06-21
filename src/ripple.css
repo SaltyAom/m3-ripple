@@ -1,51 +1,6 @@
-.salty-ripple-surface {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-.salty-ripple-surface::before,
-.salty-ripple-surface::after {
-    content: '';
-    opacity: 0;
-    position: absolute;
-}
-
-.salty-ripple-surface::before {
-    background-color: currentColor;
-    inset: 0;
-    transition:
-        opacity 15ms linear,
-        background-color 15ms linear;
-}
-
-.salty-ripple-surface::after {
-    background: radial-gradient(
-        closest-side,
-        currentColor max(100% - 70px, 65%),
-        transparent 100%
-    );
-    transform-origin: center center;
-    transition: opacity 375ms linear;
-}
-
-.salty-ripple-surface.--hover::before {
-    background-color: currentColor;
-    opacity: 0.08;
-}
-
-.salty-ripple-surface.--press::after {
-    opacity: 0.12;
-    transition-duration: 75ms;
-}
-
-/* React-specific styles */
 .salty-ripple {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     display: block;
@@ -66,7 +21,7 @@
     inset: 0;
     pointer-events: none;
     overflow: hidden;
-    border-radius: inherit;
+    border-radius: inherit;;
 }
 
 .salty-ripple .salty-ripple-surface::before,
@@ -82,8 +37,8 @@
     background-color: currentColor;
     inset: 0;
     transition:
-        opacity 15ms linear,
-        background-color 15ms linear;
+        opacity var(--ripple-duration, 150ms),
+        background-color var(--ripple-duration, 150ms);
 }
 
 .salty-ripple .salty-ripple-surface::after {
@@ -94,7 +49,7 @@
         transparent 100%
     );
     transform-origin: center center;
-    transition: opacity 375ms linear;
+    transition: opacity 375ms;
 }
 
 .salty-ripple .salty-ripple-surface.--hover::before {

@@ -1,8 +1,10 @@
 {
     "name": "m3-ripple",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "React TypeScript implementation of Material Design 3 Ripple component",
     "type": "module",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
     "author": {
         "name": "saltyAom",
         "url": "https://github.com/SaltyAom",

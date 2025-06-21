@@ -3,7 +3,6 @@ import {
     useEffect,
     useRef,
     useState,
-    useMemo,
     type PointerEvent
 } from 'react'
 
@@ -153,7 +152,10 @@ export const Ripple = ({
 
         if (pressedOpacity !== undefined)
             style.setProperty('--ripple-pressed-opacity', pressedOpacity + '')
-    }, [hoverOpacity, pressedOpacity])
+
+        if (duration !== undefined && duration !== 150)
+            style.setProperty('--ripple-duration', duration + 'ms')
+    }, [hoverOpacity, pressedOpacity, duration])
 
     const isTouch = useCallback(
         ({ pointerType }: PointerEvent) => pointerType === 'touch',
@@ -217,29 +219,24 @@ export const Ripple = ({
         const maxRadius = hypotenuse + PADDING
 
         initialSizeRef.current = initialSize
-        rippleScaleRef.current = `${(maxRadius + softEdgeSize) / initialSize}`
-        rippleSizeRef.current = `${initialSize}px`
+        rippleScaleRef.current = (maxRadius + softEdgeSize) / initialSize + ''
+        rippleSizeRef.current = initialSize + 'px'
     }, [elementRef])
 
     const getNormalizedPointerEventCoords = useCallback(
-        (
-            pointerEvent: PointerEvent
-        ): {
-            x: number
-            y: number
-        } => {
+        (pointerEvent: PointerEvent) => {
             const element = elementRef.current
             if (!element) return { x: 0, y: 0 }
 
-            const { scrollX, scrollY } = window
-            const { left, top } = element.getBoundingClientRect()
+            const position = element.getBoundingClientRect()
 
-            const documentX = scrollX + left
-            const documentY = scrollY + top
+            const documentX = window.scrollX + position.left
+            const documentY = window.scrollY + position.top
 
-            const { pageX, pageY } = pointerEvent
-
-            return { x: pageX - documentX, y: pageY - documentY }
+            return {
+                x: pointerEvent.pageX - documentX,
+                y: pointerEvent.pageY - documentY
+            }
         },
         [elementRef]
     )
