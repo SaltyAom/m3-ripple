@@ -1,6 +1,6 @@
 {
     "name": "m3-ripple",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "React TypeScript implementation of Material Design 3 Ripple component",
     "type": "module",
     "author": {
