@@ -57,6 +57,29 @@ function Demo() {
 }
 ```
 
+## CSS Variable
+You can set global CSS variables to customize the ripple opacity for hover and pressed states.
+
+```css
+:root {
+ 	--ripple-hover-opacity: 0.08;
+    --ripple-pressed-opacity: 0.12;
+}
+```
+
+Otherwise, you can set the opacity using the `hoverOpacity` and `pressedOpacity` props.
+
+```jsx
+import { Ripple } from 'm3-ripple'
+import 'm3-ripple/ripple.css'
+
+function Demo() {
+	return (
+		<Ripple hoverOpacity={0.1} pressedOpacity={0.15} />
+	)
+}
+```
+
 ## Props
 Here's a type definition of the props you can use with the `Ripple` component:
 
