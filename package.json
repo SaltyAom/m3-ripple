@@ -1,6 +1,6 @@
 {
     "name": "m3-ripple",
-    "version": "1.0.0",
+    "version": "0.0.0",
     "description": "React TypeScript implementation of Material Design 3 Ripple component",
     "type": "module",
     "author": {
@@ -45,10 +45,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/saltyaom/m3-ripple"
+        "url": "https://github.com/SaltyAom/m3-ripple"
     },
-    "bugs": "https://github.com/saltyaom/m3-ripple/issues",
-    "homepage": "https://github.com/saltyaom/m3-ripple",
+    "bugs": "https://github.com/SaltyAom/m3-ripple/issues",
+    "homepage": "https://github.com/SaltyAom/m3-ripple",
     "keywords": [
         "react",
         "ripple",
