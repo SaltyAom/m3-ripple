@@ -21,7 +21,7 @@
     inset: 0;
     pointer-events: none;
     overflow: hidden;
-    border-radius: inherit;;
+    border-radius: inherit;
 }
 
 .salty-ripple .salty-ripple-surface::before,

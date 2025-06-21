@@ -1,3 +1,7 @@
+# 1.0.2 - 22 Jun 2025
+Fix:
+- Unexpected semi-colon in CSS
+
 # 1.0.1 - 22 Jun 2025
 Improvement:
 - Export `main`, `module`, and `types` in package.json
