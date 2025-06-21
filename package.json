@@ -10,7 +10,7 @@
     },
     "scripts": {
         "dev": "vite --config vite.config.site",
-        "build": "vite build --config vite.config.lib && tsc && cp src/ripple.css dist/ripple.css && vite build --config vite.config.site",
+        "build": "vite build --config vite.config.lib && tsc && cp src/ripple.css dist/ripple.css && vite build --config vite.config.site && cp assets/* dist-web/assets",
         "lint": "eslint .",
         "preview": "serve -p 4173 dist-web"
     },
