@@ -1,6 +1,6 @@
 # m3-ripple
 
-Material Design 3 ripple effect for React
+Material Design 3 ripple effect for React ([demo](m3-ripple.saltyaom.com))
 
 ## Installation
 
