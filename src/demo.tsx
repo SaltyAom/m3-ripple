@@ -7,7 +7,7 @@
 import { useState, type CSSProperties } from 'react'
 import ReactDOM from 'react-dom/client'
 
-import { Ripple } from '.'
+import { Ripple } from '../dist'
 import './ripple.css'
 
 const buttonStyle = {

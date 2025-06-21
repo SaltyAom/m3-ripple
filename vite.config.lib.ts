@@ -4,6 +4,8 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+console.log(fileURLToPath(new URL('src/demo.tsx', import.meta.url)))
+
 // https://vite.dev/config/
 export default defineConfig({
     plugins: [react()],
@@ -22,7 +24,12 @@ export default defineConfig({
             }
         },
         rollupOptions: {
-            external: ['react', 'react-dom'],
+            external: [
+                'react',
+                'react-dom',
+                'react/jsx-runtime',
+                fileURLToPath(new URL('src/demo.tsx', import.meta.url))
+            ],
             output: {
                 globals: {
                     react: 'React',

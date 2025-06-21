@@ -22,5 +22,5 @@
         "target": "ES2022"
     },
     "include": ["src"],
-    "exclude": ["src/example"]
+    "exclude": ["src/demo.tsx"]
 }

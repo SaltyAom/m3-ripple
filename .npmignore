@@ -7,6 +7,7 @@ src
 .npmignore
 .prettierrc
 bun.lock
+bunfig.toml
 eslint.config.js
 index.html
 tsconfig.json
