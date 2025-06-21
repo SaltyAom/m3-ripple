@@ -1,0 +1,15 @@
+.DS_Store
+dist-web
+assets
+node_modules
+src
+.gitignore
+.npmignore
+.prettierrc
+bun.lock
+eslint.config.js
+index.html
+tsconfig.json
+tsconfig.tsbuildinfo
+vite.config.lib.ts
+vite.config.site.ts
