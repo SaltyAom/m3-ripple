@@ -17,7 +17,7 @@ const buttonStyle = {
     borderStyle: 'solid',
     borderWidth: '1px',
     borderColor: '#6750a4',
-    borderRadius: '20px',
+    borderRadius: '24px',
     backgroundColor: '#6750a4',
     color: 'white',
     fontSize: '14px',
@@ -27,7 +27,7 @@ const buttonStyle = {
     minWidth: '120px',
     overflow: 'hidden',
     outline: 'none',
-    transition: 'all 0.2s ease'
+    transition: 'all 0.2s ease',
 } as const satisfies CSSProperties
 
 const disabledButtonStyle = {
@@ -254,7 +254,12 @@ const Demo = () => {
 
                 <section id="group" style={cardGroupStyle}>
                     <style>
-                        {`@media (max-width: 640px) {
+                        {`
+                        button {
+                        	-webkit-tap-highlight-color: rgba(0,0,0,0);
+                        }
+
+                        @media (max-width: 640px) {
 		                    #group {
 		                    	flex-direction: column;
 							}

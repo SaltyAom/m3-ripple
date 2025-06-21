@@ -155,9 +155,10 @@ export const Ripple = ({
             style.setProperty('--ripple-pressed-opacity', pressedOpacity + '')
     }, [hoverOpacity, pressedOpacity])
 
-    const isTouch = useCallback(({ pointerType }: PointerEvent) => {
-        return pointerType === 'touch'
-    }, [])
+    const isTouch = useCallback(
+        ({ pointerType }: PointerEvent) => pointerType === 'touch',
+        []
+    )
 
     const shouldReactToEvent = useCallback(
         (event: PointerEvent) => {
@@ -185,8 +186,8 @@ export const Ripple = ({
             const element = elementRef.current
             if (!element) return false
 
-            const { top, left, bottom, right } = element.getBoundingClientRect()
-            return x >= left && x <= right && y >= top && y <= bottom
+            const p = element.getBoundingClientRect()
+            return x >= p.left && x <= p.right && y >= p.top && y <= p.bottom
         },
         [elementRef]
     )
@@ -249,11 +250,11 @@ export const Ripple = ({
             if (!element)
                 return { startPoint: { x: 0, y: 0 }, endPoint: { x: 0, y: 0 } }
 
-            const { height, width } = element.getBoundingClientRect()
+            const size = element.getBoundingClientRect()
             // end in the center
             const endPoint = {
-                x: (width - initialSizeRef.current) / 2,
-                y: (height - initialSizeRef.current) / 2
+                x: (size.width - initialSizeRef.current) / 2,
+                y: (size.height - initialSizeRef.current) / 2
             }
 
             return {
@@ -309,10 +310,7 @@ export const Ripple = ({
         if (typeof animation?.currentTime === 'number')
             pressAnimationPlayState = animation.currentTime
         else if (animation?.currentTime)
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            pressAnimationPlayState = (animation.currentTime as any).to(
-                'ms'
-            ).value
+            pressAnimationPlayState = animation.currentTime.to('ms').value
 
         if (pressAnimationPlayState >= minimumPressDuration)
             return void setPressed(false)
@@ -423,22 +421,6 @@ export const Ripple = ({
         endPressAnimation()
     }, [disabled, endPressAnimation])
 
-    // Update pressed and hovered states when disabled changes
-    useEffect(() => {
-        if (disabled) {
-            setHovered(false)
-            setPressed(false)
-        }
-    }, [disabled])
-
-    const classes = useMemo(() => {
-        const stateClasses = [hovered && 'hovered', pressed && 'pressed']
-            .filter(Boolean)
-            .join(' ')
-
-        return ['salty-ripple-surface', stateClasses].filter(Boolean).join(' ')
-    }, [hovered, pressed])
-
     return (
         <div
             ref={elementRef}
@@ -453,7 +435,10 @@ export const Ripple = ({
             onPointerLeave={handlePointerLeave}
             onPointerUp={handlePointerup}
         >
-            <div ref={surfaceRef} className={classes} />
+            <div
+                ref={surfaceRef}
+                className={`salty-ripple-surface${hovered ? ' --hover' : ''}${pressed ? ' --press' : ''}`}
+            />
         </div>
     )
 }

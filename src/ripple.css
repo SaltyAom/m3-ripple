@@ -3,6 +3,7 @@
     inset: 0;
     pointer-events: none;
     overflow: hidden;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .salty-ripple-surface::before,
@@ -30,12 +31,12 @@
     transition: opacity 375ms linear;
 }
 
-.hovered::before {
+.salty-ripple-surface.--hover::before {
     background-color: currentColor;
     opacity: 0.08;
 }
 
-.pressed::after {
+.salty-ripple-surface.--press::after {
     opacity: 0.12;
     transition-duration: 75ms;
 }
@@ -96,12 +97,12 @@
     transition: opacity 375ms linear;
 }
 
-.salty-ripple .salty-ripple-surface.hovered::before {
+.salty-ripple .salty-ripple-surface.--hover::before {
     background-color: currentColor;
     opacity: var(--ripple-hover-opacity, 0.08);
 }
 
-.salty-ripple .salty-ripple-surface.pressed::after {
+.salty-ripple .salty-ripple-surface.--press::after {
     opacity: var(--ripple-pressed-opacity, 0.12);
     transition-duration: 75ms;
 }
