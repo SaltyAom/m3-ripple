@@ -45,10 +45,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/elysiajs/elysia"
+        "url": "https://github.com/saltyaom/m3-ripple"
     },
-    "bugs": "https://github.com/elysiajs/elysia/issues",
-    "homepage": "https://github.com/elysiajs/elysia",
+    "bugs": "https://github.com/saltyaom/m3-ripple/issues",
+    "homepage": "https://github.com/saltyaom/m3-ripple",
     "keywords": [
         "react",
         "ripple",
