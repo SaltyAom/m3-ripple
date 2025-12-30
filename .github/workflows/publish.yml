@@ -42,4 +42,4 @@ jobs:
 
       - name: 'Publish'
         run: |
-          NPM_TOKEN="" npm publish --provenance --access=public
+          NPM_AUTH_TOKEN="" npm publish --provenance --access=public
