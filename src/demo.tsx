@@ -24,7 +24,6 @@ const buttonStyle = {
     cursor: 'pointer',
     margin: '8px',
     minWidth: '120px',
-    overflow: 'hidden',
     outline: 'none',
     transition: 'all 0.2s ease',
 } as const satisfies CSSProperties
@@ -239,7 +238,7 @@ const Demo = () => {
                     disabled={disabled}
                     onClick={!disabled ? handleClick : undefined}
                 >
-                    <Ripple disabled={disabled} />
+                    <Ripple />
                     {disabled ? 'Disabled' : 'Enabled'}
                 </button>
             </article>

@@ -1,10 +1,4 @@
-import {
-    useCallback,
-    useEffect,
-    useRef,
-    useState,
-    type PointerEvent
-} from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 const INITIAL_ORIGIN_SCALE = 0.2
 const PADDING = 12
@@ -157,6 +151,37 @@ export const Ripple = ({
             style.setProperty('--ripple-duration', duration + 'ms')
     }, [hoverOpacity, pressedOpacity, duration])
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const add = (name: string, fn: (...a: any) => unknown) =>
+        parent.addEventListener(name, fn, true)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rm = (name: string, fn: (...a: any) => unknown) =>
+        parent.removeEventListener(name, fn, true)
+
+    useEffect(() => {
+        const parent = elementRef.current?.parentElement
+        if (!parent) return
+
+        add('click', handleClick)
+        add('contextmenu', handleContextMenu)
+        add('pointercancel', handlePointerCancel)
+        add('pointerdown', handlePointerDown)
+        add('pointerenter', handlePointerEnter)
+        add('pointerleave', handlePointerLeave)
+        add('pointerup', handlePointerup)
+
+        return () => {
+            rm('click', handleClick)
+            rm('contextmenu', handleContextMenu)
+            rm('pointercancel', handlePointerCancel)
+            rm('pointerdown', handlePointerDown)
+            rm('pointerenter', handlePointerEnter)
+            rm('pointerleave', handlePointerLeave)
+            rm('pointerup', handlePointerup)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [disabled, easing, duration, minimumPressDuration, touchDelay])
+
     const isTouch = useCallback(
         ({ pointerType }: PointerEvent) => pointerType === 'touch',
         []
@@ -164,7 +189,13 @@ export const Ripple = ({
 
     const shouldReactToEvent = useCallback(
         (event: PointerEvent) => {
-            if (disabled || !event.isPrimary) return false
+            if (
+                disabled ||
+                // @ts-ignore
+                elementRef.current?.parentElement?.disabled ||
+                !event.isPrimary
+            )
+                return false
 
             if (
                 rippleStartEventRef.current &&
@@ -424,13 +455,6 @@ export const Ripple = ({
             className={`salty-ripple${className ? ` ${className}` : ''}`}
             style={style}
             aria-hidden="true"
-            onClick={handleClick}
-            onContextMenu={handleContextMenu}
-            onPointerCancel={handlePointerCancel}
-            onPointerDown={handlePointerDown}
-            onPointerEnter={handlePointerEnter}
-            onPointerLeave={handlePointerLeave}
-            onPointerUp={handlePointerup}
         >
             <div
                 ref={surfaceRef}

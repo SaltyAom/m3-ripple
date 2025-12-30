@@ -5,6 +5,9 @@
     height: 100%;
     display: block;
     margin: auto;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: inherit;
 }
 
 .salty-ripple[aria-disabled='true'] {
