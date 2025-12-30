@@ -151,16 +151,13 @@ export const Ripple = ({
             style.setProperty('--ripple-duration', duration + 'ms')
     }, [hoverOpacity, pressedOpacity, duration])
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const add = (name: string, fn: (...a: any) => unknown) =>
-        parent.addEventListener(name, fn, true)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const rm = (name: string, fn: (...a: any) => unknown) =>
-        parent.removeEventListener(name, fn, true)
-
     useEffect(() => {
         const parent = elementRef.current?.parentElement
         if (!parent) return
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const add = (name: string, fn: (...a: any) => unknown) =>
+            parent.addEventListener(name, fn, true)
 
         add('click', handleClick)
         add('contextmenu', handleContextMenu)
@@ -171,6 +168,10 @@ export const Ripple = ({
         add('pointerup', handlePointerup)
 
         return () => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const rm = (name: string, fn: (...a: any) => unknown) =>
+                parent.removeEventListener(name, fn, true)
+
             rm('click', handleClick)
             rm('contextmenu', handleContextMenu)
             rm('pointercancel', handlePointerCancel)

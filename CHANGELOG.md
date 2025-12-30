@@ -1,3 +1,7 @@
+# 1.1.1 - 30 Dec
+Fix:
+- ripple sharing element
+
 # 1.1.0 - 30 Dec 2025
 Improvement:
 - add `pointer-events: none` to ripple element to prevent blocking pointer events on parent elements
