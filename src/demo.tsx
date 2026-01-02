@@ -25,7 +25,7 @@ const buttonStyle = {
     margin: '8px',
     minWidth: '120px',
     outline: 'none',
-    transition: 'all 0.2s ease',
+    transition: 'all 0.2s ease'
 } as const satisfies CSSProperties
 
 const disabledButtonStyle = {
@@ -349,7 +349,8 @@ const Demo = () => {
                     </div>
 
                     <div style={cardStyle}>
-                        <Ripple />
+                        <Ripple
+                        />
                         <h4 style={{ margin: '0 0 8px 0' }}>Keyboard</h4>
                         <p
                             style={{

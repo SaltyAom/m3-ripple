@@ -37,7 +37,7 @@
 .salty-ripple .salty-ripple-surface::before {
     width: 100%;
     height: 100%;
-    background-color: currentColor;
+    background-color: var(--ripple-color, currentColor);
     inset: 0;
     transition:
         opacity var(--ripple-duration, 150ms),
@@ -48,7 +48,7 @@
     inset: 0;
     background: radial-gradient(
         closest-side,
-        currentColor max(100% - 70px, 65%),
+        var(--ripple-color, currentColor) max(100% - 70px, 65%),
         transparent 100%
     );
     transform-origin: center center;
@@ -56,7 +56,7 @@
 }
 
 .salty-ripple .salty-ripple-surface.--hover::before {
-    background-color: currentColor;
+    background-color: var(--ripple-color, currentColor);
     opacity: var(--ripple-hover-opacity, 0.08);
 }
 

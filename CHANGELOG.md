@@ -1,4 +1,11 @@
-# 1.1.1 - 30 Dec
+# 1.1.2 - 2 Jan 2026
+Improvement:
+- add `--ripple-color` to set default ripple color
+
+Fix:
+- default ripple to center when using keyboard event
+
+# 1.1.1 - 30 Dec 2025
 Fix:
 - ripple sharing element
 

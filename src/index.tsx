@@ -275,7 +275,7 @@ export const Ripple = ({
 
     const getTranslationCoordinates = useCallback(
         (positionEvent?: PointerEvent) => {
-            const element = elementRef.current!.parentElement
+            const element = elementRef.current?.parentElement
             if (!element)
                 return { startPoint: { x: 0, y: 0 }, endPoint: { x: 0, y: 0 } }
 
@@ -287,7 +287,10 @@ export const Ripple = ({
             }
 
             return {
-                startPoint: getNormalizedPointerEventCoords(positionEvent!),
+                // If using keyboard, start in the center
+                startPoint: positionEvent
+                    ? getNormalizedPointerEventCoords(positionEvent)
+                    : endPoint,
                 endPoint
             }
         },
