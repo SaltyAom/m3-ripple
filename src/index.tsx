@@ -309,8 +309,8 @@ export const Ripple = ({
             const { startPoint, endPoint } =
                 getTranslationCoordinates(positionEvent)
 
-            const translateStart = `${startPoint.x}px, ${startPoint.y}px`
-            const translateEnd = `${endPoint.x}px, ${endPoint.y}px`
+            const translateStart = `${startPoint.x}px,${startPoint.y}px`
+            const translateEnd = `${endPoint.x}px,${endPoint.y}px`
 
             growAnimationRef.current = surface.animate(
                 {
