@@ -1,3 +1,7 @@
+# 1.1.3 - 3 Jan 2026
+Fix:
+- remove `overflow-hidden` from ripple to prevent missing ripple effect on Safari
+
 # 1.1.2 - 2 Jan 2026
 Improvement:
 - add `--ripple-color` to set default ripple color

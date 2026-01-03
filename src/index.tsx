@@ -4,7 +4,6 @@ const INITIAL_ORIGIN_SCALE = 0.2
 const PADDING = 12
 const SOFT_EDGE_MINIMUM_SIZE = 75
 const SOFT_EDGE_CONTAINER_RATIO = 0.35
-const ANIMATION_FILL = 'forwards'
 
 export interface RippleProps {
     /**
@@ -325,7 +324,7 @@ export const Ripple = ({
                     pseudoElement: '::after',
                     duration,
                     easing,
-                    fill: ANIMATION_FILL
+                    fill: 'forwards'
                 }
             )
         },
@@ -417,22 +416,25 @@ export const Ripple = ({
         [shouldReactToEvent, isTouch, inBounds, startPressAnimation, touchDelay]
     )
 
-    const handleClick = useCallback(() => {
-        // Click is a MouseEvent in Firefox and Safari, so we cannot use
-        // `shouldReactToEvent`
-        if (disabled) return
+    const handleClick = useCallback(
+        (event: PointerEvent) => {
+            // Click is a MouseEvent in Firefox and Safari, so we cannot use
+            // `shouldReactToEvent`
+            if (disabled) return
 
-        if (stateRef.current === State.WAITING_FOR_CLICK) {
-            endPressAnimation()
-            return
-        }
+            if (stateRef.current === State.WAITING_FOR_CLICK) {
+                endPressAnimation()
+                return
+            }
 
-        if (stateRef.current === State.INACTIVE) {
-            // keyboard synthesized click event
-            startPressAnimation()
-            endPressAnimation()
-        }
-    }, [disabled, endPressAnimation, startPressAnimation])
+            if (stateRef.current === State.INACTIVE) {
+                // keyboard synthesized click event
+                startPressAnimation(event)
+                endPressAnimation()
+            }
+        },
+        [disabled, endPressAnimation, startPressAnimation]
+    )
 
     const handlePointerCancel = useCallback(
         (event: PointerEvent) => {
