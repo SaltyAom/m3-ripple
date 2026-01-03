@@ -74,7 +74,7 @@ export interface RippleProps {
  * On Mouse or Pen:
  *   - `INACTIVE -> WAITING_FOR_CLICK -> INACTIVE`
  */
-enum State {
+const State = {
     /**
      * Initial state of the control, no touch in progress.
      *
@@ -82,7 +82,7 @@ enum State {
      *   - on touch down: transition to `TOUCH_DELAY`.
      *   - on mouse down: transition to `WAITING_FOR_CLICK`.
      */
-    INACTIVE,
+    INACTIVE: 0,
     /**
      * Touch down has been received, waiting to determine if it's a swipe or
      * scroll.
@@ -92,22 +92,22 @@ enum State {
      *   - on cancel: transition to `INACTIVE`.
      *   - after `TOUCH_DELAY_MS`: begin press; transition to `HOLDING`.
      */
-    TOUCH_DELAY,
+    TOUCH_DELAY: 1,
     /**
      * A touch has been deemed to be a press
      *
      * Transitions:
      *  - on up: transition to `WAITING_FOR_CLICK`.
      */
-    HOLDING,
+    HOLDING: 2,
     /**
      * The user touch has finished, transition into rest state.
      *
      * Transitions:
      *   - on click end press; transition to `INACTIVE`.
      */
-    WAITING_FOR_CLICK
-}
+    WAITING_FOR_CLICK: 3
+} as const
 
 /**
  * A ripple component.
@@ -132,7 +132,7 @@ export const Ripple = ({
     const rippleScaleRef = useRef('')
     const initialSizeRef = useRef(0)
     const growAnimationRef = useRef<Animation | undefined>(undefined)
-    const stateRef = useRef<State>(State.INACTIVE)
+    const stateRef = useRef<(typeof State)[keyof typeof State]>(State.INACTIVE)
     const rippleStartEventRef = useRef<PointerEvent | undefined>(undefined)
     const checkBoundsAfterContextMenuRef = useRef(false)
 
@@ -387,7 +387,7 @@ export const Ripple = ({
     )
 
     const handlePointerDown = useCallback(
-        async (event: PointerEvent) => {
+        (event: PointerEvent) => {
             if (!shouldReactToEvent(event)) return
 
             rippleStartEventRef.current = event
@@ -407,14 +407,12 @@ export const Ripple = ({
 
             // Wait for a hold after touch delay
             stateRef.current = State.TOUCH_DELAY
-            await new Promise((resolve) => {
-                setTimeout(resolve, touchDelay)
-            })
+            setTimeout(() => {
+                if (stateRef.current !== State.TOUCH_DELAY) return
 
-            if (stateRef.current !== State.TOUCH_DELAY) return
-
-            stateRef.current = State.HOLDING
-            startPressAnimation(event)
+                stateRef.current = State.HOLDING
+                startPressAnimation(event)
+            }, touchDelay)
         },
         [shouldReactToEvent, isTouch, inBounds, startPressAnimation, touchDelay]
     )
